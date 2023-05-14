@@ -1,0 +1,32 @@
+
+{% extends 'pages/base.html' %} 
+
+{% block content %}
+             
+<style>
+	.red{
+		max-width: 180;
+	}
+</style>
+
+  <div class="col-6 col-sm-4">
+	<form method="POST" enctype="multipart/form-data" class="card" >
+		{% csrf_token %} 
+		
+	    {% if user.profile %}
+			<img class=" red rounded-circle article-img img-thumbnail img-fluid avatar rounded float-start" src="{{ user.profile.image.url }}" alt="profile_picture" accept=".jpg,.jpeg,.png"/>
+	    {% endif %}
+	    
+	    <h2 class="text-center">{{ user.username | title }}</h2>
+	    <p class="text-center"><a href="mailto:{{user.email}}">{{user.email}}</a></p>
+		<hr>
+		
+		
+        <a class="btn btn-sm btn-outline-secondary" href="{% url 'user-posts' user.username  %}"><h2>  Your Posts</h2></a>
+		
+		
+	    <a class="btn btn-sm btn-outline-secondary" href="{% url 'page-create' %}"><h2>Add Post</h2></a>
+	
+	</form>
+</div>
+{% endblock content %}

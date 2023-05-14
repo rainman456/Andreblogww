@@ -1,0 +1,31 @@
+{% extends "pages/base.html" %}
+{% block content %}
+   <style>
+
+      body {
+
+          background-color: #f2f2f2;
+
+      }
+
+   </style>
+             
+      <form method="POST"  class="card" action="">
+         {% csrf_token %}
+        <h2 class="card-title text-center mb-4">Create your account</h2>
+       {% for field in form %}
+             <div class="form-group mb-3">
+              {{ field.label_tag }} 
+               {{ field }}
+               {% if field.errors %}
+                  <small class="error">{{ field.errors|striptags  }}</small> 
+               {% endif %}
+             </div>
+       {% endfor %}
+ 
+       <input type="submit" value="Register" class="btn btn-primary full-width">
+       <hr>
+       <p class="text-center">Already have an account? <a href="{% url 'page-login' %}">Login Here</a></p>
+       </form>
+
+{% endblock content %}
